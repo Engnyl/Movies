@@ -9,7 +9,7 @@ import Foundation
 
 struct AuthModel: Codable {
     let success: Bool
-    let expires_at, request_token: String
+    let expires_at, request_token: String?
     
     enum CodingKeys: String, CodingKey {
         case success, expires_at, request_token

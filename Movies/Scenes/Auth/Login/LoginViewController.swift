@@ -7,12 +7,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class LoginViewController: SuperViewController {
+    
+    var viewModel: LoginViewModelProtocol! {
+        didSet {
+            viewModel.delegate = self
+            viewModel.loadView()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         auth()
+    }
+    
+    func prepareView() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
+    }
+    
+    @objc func loginButtonTapped() {
+        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: "Engnyl", password: "1234", request_token: getStringPreference(key: REQUEST_TOKEN)!)
+        viewModel.loginButtonPressed(loginRequestModel: loginRequestModel)
     }
 
     func auth() {
@@ -75,3 +92,36 @@ class ViewController: UIViewController {
     }
 }
 
+extension LoginViewController: LoginViewModelDelegate {
+    
+    func handleViewModelOutput(_ output: LoginViewModelOutput) {
+        switch output {
+        case .loadView:
+            prepareView()
+        case .showToastMessage(let message):
+            showToastOnCenter(message: message, title: nil, duration: 3.0)
+        case .isLoading(let loading):
+            loading ? LoadingView.startLoading() : LoadingView.stopLoading()
+        case .hideKeyboard:
+            dismissKeyboard()
+        }
+    }
+    
+    func navigate(to route: LoginViewRoute) {
+        switch route {
+        case .customTabBar:
+            let customTabBarController = CustomTabBarBuilder.make()
+            let navigationController = UINavigationController(rootViewController: customTabBarController)
+            
+            let transition = CATransition()
+            transition.duration = 0.35
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.type = CATransitionType.push
+            transition.subtype = CATransitionSubtype.fromRight
+            navigationController.view.layer.add(transition, forKey: nil)
+            
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first!.rootViewController = navigationController
+            UIApplication.shared.windows.filter {$0.isKeyWindow}.first!.makeKeyAndVisible()
+        }
+    }
+}

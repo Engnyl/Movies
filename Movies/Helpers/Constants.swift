@@ -9,3 +9,8 @@ import Foundation
 
 let REQUEST_TOKEN = "request_token"
 let REQUEST_TOKEN_EXPIRE = "expires_at"
+
+enum StoryboardIdentifier: String {
+    case auth = "Auth"
+    case main = "Main"
+}

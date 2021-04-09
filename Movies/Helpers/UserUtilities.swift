@@ -14,3 +14,12 @@ func registerToken(authModel: AuthModel) {
     setPreference(key: REQUEST_TOKEN, value: authModel.request_token)
     setPreference(key: REQUEST_TOKEN_EXPIRE, value: authModel.expires_at)
 }
+
+func userAuthenticated() -> Bool {
+    if getStringPreference(key: REQUEST_TOKEN) != nil &&
+       getStringPreference(key: REQUEST_TOKEN_EXPIRE) != nil {
+        return true
+    }
+    
+    return false
+}
