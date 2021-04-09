@@ -12,6 +12,7 @@ protocol LoginViewModelProtocol {
     
     func loadView()
     func loginButtonPressed(loginRequestModel: LoginRequestModel)
+    func loginViaWebsiteButtonTapped(loginRequestModel: LoginRequestModel)
 }
 
 enum LoginViewModelOutput {

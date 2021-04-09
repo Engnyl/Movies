@@ -60,12 +60,12 @@ func getSemiboldFont(punto: CGFloat) -> UIFont {
 
 func configureToastView() {
     var style = ToastStyle()
-    style.backgroundColor = UIColor.black
-    style.messageColor = UIColor.white
+    style.backgroundColor = darkBlueColor
+    style.messageColor = UIColor.white.withAlphaComponent(0.5)
     style.titleAlignment = NSTextAlignment.center
     style.messageAlignment = NSTextAlignment.center
-    style.titleFont = getRegularFont(punto: 13 + getFontDifference())
-    style.messageFont = getRegularFont(punto: 13 + getFontDifference())
+    style.titleFont = getRegularFont(punto: 16 + getFontDifference())
+    style.messageFont = getRegularFont(punto: 16 + getFontDifference())
     
     ToastManager.shared.style = style
     ToastManager.shared.isQueueEnabled = false

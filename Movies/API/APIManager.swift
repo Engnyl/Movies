@@ -37,7 +37,7 @@ final class APIManager: NSObject {
                             do {
                                 let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
                                 
-                                if let message = responseJSON["message"] as? String {
+                                if let message = responseJSON["status_message"] as? String {
                                     succeed(data, message)
                                 }
                                 else {
@@ -49,7 +49,7 @@ final class APIManager: NSObject {
                             }
                         }
                         else {
-                            guard let message = responseJSON["message"] as? String else {
+                            guard let message = responseJSON["status_message"] as? String else {
                                 failed(ResponseError.serverError.rawValue)
                                 
                                 return
@@ -91,7 +91,7 @@ final class APIManager: NSObject {
                             do {
                                 let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
                                 
-                                if let message = responseJSON["message"] as? String {
+                                if let message = responseJSON["status_message"] as? String {
                                     succeed(data, message)
                                 }
                                 else {
@@ -103,7 +103,7 @@ final class APIManager: NSObject {
                             }
                         }
                         else {
-                            guard let message = responseJSON["message"] as? String else {
+                            guard let message = responseJSON["status_message"] as? String else {
                                 failed(ResponseError.serverError.rawValue)
                                 
                                 return

@@ -21,6 +21,13 @@ final class SearchViewController: SuperViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+        tabBarController?.navigationItem.title = "Search"
+        
+        super.viewWillAppear(animated)
+    }
+    
     func prepareView() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         

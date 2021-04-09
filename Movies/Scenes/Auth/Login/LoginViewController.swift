@@ -8,6 +8,10 @@
 import UIKit
 
 final class LoginViewController: SuperViewController {
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginViaWebsiteButton: UIButton!
     
     var viewModel: LoginViewModelProtocol! {
         didSet {
@@ -18,77 +22,35 @@ final class LoginViewController: SuperViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
         
-        auth()
+        super.viewWillAppear(animated)
     }
     
     func prepareView() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [lightBlueColor.cgColor, darkBlueColor.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        loginButton.backgroundColor = darkBlueColor
+        loginViaWebsiteButton.backgroundColor = darkBlueColor
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
+        loginViaWebsiteButton.addTarget(self, action: #selector(loginViaWebsiteButtonTapped), for: UIControl.Event.touchUpInside)
     }
     
     @objc func loginButtonTapped() {
-        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: "Engnyl", password: "1234", request_token: getStringPreference(key: REQUEST_TOKEN)!)
+        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: usernameTextField.text, password: passwordTextField.text, request_token: getStringPreference(key: REQUEST_TOKEN))
         viewModel.loginButtonPressed(loginRequestModel: loginRequestModel)
     }
-
-    func auth() {
-        let requestTokenAPIRequest: RequestTokenAPIRequest = RequestTokenAPIRequest.init()
-        requestTokenAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
-            //self?.notifyViewController(.isLoading(loading: false))
-            
-            guard let self = self else { return }
-            
-            guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
-                //self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
-                
-                
-                showToastOnCenter(message: ResponseError.decodingError.rawValue, title: nil, duration: 3.0)
-                
-                return
-            }
-            
-            print(responseObject)
-            registerToken(authModel: responseObject)
-            self.login()
-            
-            //self.navigateViewController(.customTabBar)
-        }) { [weak self] (message) in
-            //self?.notifyViewController(.isLoading(loading: false))
-            
-            guard let self = self else { return }
-            
-            //self.notifyViewController(.showToastMessage(message: message))
-        }
-    }
-
-    func login() {
-        let loginAPIRequest: LoginAPIRequest = LoginAPIRequest.init(loginRequestModel: LoginRequestModel.init(username: "Engnyl", password: "1234", request_token: getStringPreference(key: REQUEST_TOKEN)!))
-        loginAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
-            //self?.notifyViewController(.isLoading(loading: false))
-            
-            guard let self = self else { return }
-            
-            guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
-                //self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
-                
-                
-                showToastOnCenter(message: ResponseError.decodingError.rawValue, title: nil, duration: 3.0)
-                
-                return
-            }
-            
-            print(responseObject)
-            registerToken(authModel: responseObject)
-            
-            //self.navigateViewController(.customTabBar)
-        }) { [weak self] (message) in
-            //self?.notifyViewController(.isLoading(loading: false))
-            
-            guard let self = self else { return }
-            
-            //self.notifyViewController(.showToastMessage(message: message))
-        }
+    
+    @objc func loginViaWebsiteButtonTapped() {
+        
     }
 }
 

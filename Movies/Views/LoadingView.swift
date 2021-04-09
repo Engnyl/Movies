@@ -23,7 +23,7 @@ final class LoadingView: UIView {
         let backView: UIView = UIView(frame: CGRect(x: (window.frame.size.width - spinnerViewWidth) / 2, y: (window.frame.size.height - spinnerViewHeight) / 2, width: spinnerViewWidth, height: spinnerViewHeight))
         backView.tag = 1002
         backView.layer.cornerRadius = 15
-        backView.backgroundColor = UIColor.black
+        backView.backgroundColor = darkBlueColor
         
         let topView: UIView = UIView(frame: CGRect(x: (window.frame.size.width - spinnerViewWidth) / 2, y: ((window.frame.size.height - spinnerViewHeight) / 2) + 8, width: spinnerViewWidth, height: (spinnerViewHeight * 0.65) - spinnerViewVerticalMargin))
         topView.tag = 1003
@@ -39,7 +39,7 @@ final class LoadingView: UIView {
         
         let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: bottomView.frame.size.width, height: bottomView.frame.size.height))
         label.tag = 1006
-        label.font = getRegularFont(punto: 17)
+        label.font = getRegularFont(punto: 16)
         label.font = UIFont(name: label.font!.fontName, size: label.font!.pointSize + (isDeviceiPad() ? 3 : 0))
         label.textColor = UIColor.white
         label.textAlignment = .center

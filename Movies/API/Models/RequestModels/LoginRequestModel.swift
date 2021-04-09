@@ -8,7 +8,7 @@
 import Foundation
 
 struct LoginRequestModel: Codable {
-    let username, password, request_token: String
+    let username, password, request_token: String?
     
     enum CodingKeys: String, CodingKey {
         case username, password, request_token
