@@ -39,18 +39,20 @@ final class LoginViewModel: LoginViewModelProtocol {
     }
     
     func loginViaWebsiteButtonTapped(loginRequestModel: LoginRequestModel) {
-        
+        self.notifyViewController(.hideKeyboard)
+        self.notifyViewController(.isLoading(loading: true))
+        self.startAuthentication(loginRequestModel: loginRequestModel)
     }
     
     private func startAuthentication(loginRequestModel: LoginRequestModel) {
         let requestTokenAPIRequest: RequestTokenAPIRequest = RequestTokenAPIRequest.init()
         requestTokenAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
-            self?.notifyViewController(.isLoading(loading: false))
             
             guard let self = self else { return }
             
             guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
+                self.notifyViewController(.isLoading(loading: false))
                 
                 return
             }

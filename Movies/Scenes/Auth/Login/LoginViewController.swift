@@ -45,12 +45,13 @@ final class LoginViewController: SuperViewController {
     }
     
     @objc func loginButtonTapped() {
-        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: usernameTextField.text, password: passwordTextField.text, request_token: getStringPreference(key: REQUEST_TOKEN))
+        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: usernameTextField.text, password: passwordTextField.text, request_token: nil)
         viewModel.loginButtonPressed(loginRequestModel: loginRequestModel)
     }
     
     @objc func loginViaWebsiteButtonTapped() {
-        
+        let loginRequestModel: LoginRequestModel = LoginRequestModel.init(username: "engnyl", password: "1234", request_token: nil)
+        viewModel.loginButtonPressed(loginRequestModel: loginRequestModel)
     }
 }
 
