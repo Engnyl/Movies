@@ -16,7 +16,7 @@ final class SearchMovieAPIRequest: APIRequest {
                              httpMethod: HTTPMethod.get,
                              bodyParameters: nil,
                              urlParameters: ["api_key" : APIKey,
-                                             "query" : query])
+                                             "query" : query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!])
     }
     
     override func APIRequest(succeed: @escaping (_ responseData : Data, _ message : String?) -> Void, failed: @escaping (_ message : String) -> Void) {

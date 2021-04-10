@@ -13,8 +13,7 @@ struct MovieModel: Codable {
     let backdropPath: String?
     let genreIDS: [Int]
     let id: Int
-    let originalLanguage: OriginalLanguage
-    let originalTitle, overview: String
+    let originalLanguage, originalTitle, overview: String
     let popularity: Double
     let posterPath: String?
     let releaseDate, title: String
@@ -36,12 +35,4 @@ struct MovieModel: Codable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
-}
-
-// MARK: - OriginalLanguage
-enum OriginalLanguage: String, Codable {
-    case de = "de"
-    case en = "en"
-    case fr = "fr"
-    case ru = "ru"
 }

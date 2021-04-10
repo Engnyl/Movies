@@ -15,6 +15,7 @@ protocol SearchViewModelProtocol {
     func loadView()
     func getMovie(at indexPath : IndexPath) -> MovieModel
     func goMovieInfo(at indexPath : IndexPath)
+    func searchMovie(query: String)
 }
 
 enum SearchViewModelOutput {

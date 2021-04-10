@@ -34,6 +34,16 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard searchBar.text!.count > 0 else { return }
+        
+        searchBar.resignFirstResponder()
+        viewModel.searchMovie(query: searchBar.text!)
+    }
+}
+
 final class SearchViewController: SuperViewController {
     @IBOutlet weak var moviesTableView: UITableView! {
         didSet {
@@ -41,6 +51,11 @@ final class SearchViewController: SuperViewController {
             moviesTableView.dataSource = self
             moviesTableView.tableFooterView = UIView(frame: CGRect.zero)
             moviesTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        }
+    }
+    @IBOutlet weak var moviesSearchBar: UISearchBar! {
+        didSet {
+            moviesSearchBar.delegate = self
         }
     }
     

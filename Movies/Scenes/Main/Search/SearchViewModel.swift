@@ -35,6 +35,31 @@ final class SearchViewModel: SearchViewModelProtocol {
         self.navigateViewController(.movieDetail(MovieInfoViewModel(), movies[indexPath.row].id))
     }
     
+    func searchMovie(query: String) {
+        self.notifyViewController(.isLoading(loading: true))
+        
+        let searchMovieAPIRequest: SearchMovieAPIRequest = SearchMovieAPIRequest.init(query: query)
+        searchMovieAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
+            self?.notifyViewController(.isLoading(loading: false))
+            
+            guard let self = self else { return }
+            
+            guard let responseObject = try? JSONDecoder().decode(SearchListModel.self, from: responseData) else {
+                self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
+                
+                return
+            }
+            
+            self.processMovies(searchList: responseObject)
+        }) { [weak self] (message) in
+            self?.notifyViewController(.isLoading(loading: false))
+            
+            guard let self = self else { return }
+            
+            self.notifyViewController(.showToastMessage(message: message))
+        }
+    }
+    
     private func getSession() {
         let sessionAPIRequest: SessionAPIRequest = SessionAPIRequest.init(authRequestModel: AuthRequestModel.init(username: nil, password: nil, request_token: getStringPreference(key: REQUEST_TOKEN)))
         sessionAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
@@ -74,34 +99,9 @@ final class SearchViewModel: SearchViewModelProtocol {
             registerAccountID(accountModel: responseObject)
             self.notifyViewController(.loadView)
             self.notifyViewController(.setTitle(title: "Search"))
-            
-            self.searchMovie(query: "Hobbit")
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             invalidateSession()
-            
-            guard let self = self else { return }
-            
-            self.notifyViewController(.showToastMessage(message: message))
-        }
-    }
-    
-    private func searchMovie(query: String) {
-        let searchMovieAPIRequest: SearchMovieAPIRequest = SearchMovieAPIRequest.init(query: query)
-        searchMovieAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
-            self?.notifyViewController(.isLoading(loading: false))
-            
-            guard let self = self else { return }
-            
-            guard let responseObject = try? JSONDecoder().decode(SearchListModel.self, from: responseData) else {
-                self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
-                
-                return
-            }
-            
-            self.processMovies(searchList: responseObject)
-        }) { [weak self] (message) in
-            self?.notifyViewController(.isLoading(loading: false))
             
             guard let self = self else { return }
             
