@@ -23,14 +23,12 @@ final class SearchViewController: SuperViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-        tabBarController?.navigationItem.title = "Search"
         
         super.viewWillAppear(animated)
     }
     
     func prepareView() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
-        
     }
 }
 
@@ -46,12 +44,16 @@ extension SearchViewController: SearchViewModelDelegate {
             loading ? LoadingView.startLoading() : LoadingView.stopLoading()
         case .hideKeyboard:
             dismissKeyboard()
+        case .setTitle(let title):
+            tabBarController?.navigationItem.title = title
         }
     }
     
     func navigate(to route: SearchViewRoute) {
         switch route {
-        case .movieDetail:
+        case .movieDetail(let viewModel):
+            let viewController = MovieInfoViewBuilder.make(with: viewModel)
+            navigationController?.pushViewController(viewController, animated: true)
             break
         }
     }

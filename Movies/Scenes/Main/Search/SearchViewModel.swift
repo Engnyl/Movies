@@ -1,5 +1,5 @@
 //
-//  SearchViewModels.swift
+//  SearchViewModel.swift
 //  Movies
 //
 //  Created by Engin Yildiz on 9.04.2021.
@@ -53,9 +53,37 @@ final class SearchViewModel: SearchViewModelProtocol {
             
             registerAccountID(accountModel: responseObject)
             self.notifyViewController(.loadView)
+            self.notifyViewController(.setTitle(title: "Search"))
+            
+            //self.searchMovie(query: "Hobbit")
+            //self.getMovieInfo(movieID: "49051")
+            self.navigateViewController(.movieDetail(MovieInfoViewModel()))
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             invalidateSession()
+            
+            guard let self = self else { return }
+            
+            self.notifyViewController(.showToastMessage(message: message))
+        }
+    }
+    
+    private func searchMovie(query: String) {
+        let searchMovieAPIRequest: SearchMovieAPIRequest = SearchMovieAPIRequest.init(query: query)
+        searchMovieAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
+            self?.notifyViewController(.isLoading(loading: false))
+            
+            guard let self = self else { return }
+            
+            guard let responseObject = try? JSONDecoder().decode(SearchListModel.self, from: responseData) else {
+                self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
+                
+                return
+            }
+            
+            print(responseObject)
+        }) { [weak self] (message) in
+            self?.notifyViewController(.isLoading(loading: false))
             
             guard let self = self else { return }
             

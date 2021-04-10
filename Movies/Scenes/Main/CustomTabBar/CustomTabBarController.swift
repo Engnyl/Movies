@@ -12,6 +12,9 @@ final class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBar.barTintColor = darkGrayColor
+        self.tabBar.tintColor = darkBlueColor
+        
         viewControllers = [SearchViewBuilder.make(with: SearchViewModel())]
     }
 }

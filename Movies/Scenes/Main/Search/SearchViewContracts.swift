@@ -18,10 +18,11 @@ enum SearchViewModelOutput {
     case showToastMessage(message: String)
     case isLoading(loading: Bool)
     case hideKeyboard
+    case setTitle(title: String)
 }
 
 enum SearchViewRoute {
-    case movieDetail
+    case movieDetail(MovieInfoViewModelProtocol)
 }
 
 protocol SearchViewModelDelegate: class {

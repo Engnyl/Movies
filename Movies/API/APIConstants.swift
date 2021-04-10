@@ -9,11 +9,14 @@ import Foundation
 
 let APIKey = "d25f167dc622630d04929091478b7aa3"
 let baseURL = "https://api.themoviedb.org/3"
+let imageBaseURL = "https://image.tmdb.org/t/p/w500"
 
 let requestTokenURL = "/authentication/token/new?"
 let loginURL = "/authentication/token/validate_with_login?"
 let newSessionURL = "/authentication/session/new?"
 let accountURL = "/account?"
+let searchMovieURL = "/search/movie?"
+let movieInfoURL = "/movie/%@?"
 
 public enum HTTPMethod: String {
     case get = "GET"
