@@ -1,22 +1,20 @@
 //
-//  LoginAPIRequest.swift
+//  SessionAPIRequest.swift
 //  Movies
 //
-//  Created by Engin Yildiz on 8.04.2021.
+//  Created by Engin Yildiz on 10.04.2021.
 //
 
 import Foundation
 
-final class LoginAPIRequest: APIRequest {
+final class SessionAPIRequest: APIRequest {
     
     init(authRequestModel: AuthRequestModel) {
         super.init()
         
-        super.initAPIRequest(endPoint: loginURL,
+        super.initAPIRequest(endPoint: newSessionURL,
                              httpMethod: HTTPMethod.post,
-                             bodyParameters: [AuthRequestModel.CodingKeys.username.rawValue : authRequestModel.username!,
-                                              AuthRequestModel.CodingKeys.password.rawValue : authRequestModel.password!,
-                                              AuthRequestModel.CodingKeys.request_token.rawValue : authRequestModel.request_token!],
+                             bodyParameters: [AuthRequestModel.CodingKeys.request_token.rawValue : authRequestModel.request_token!],
                              urlParameters: ["api_key" : APIKey])
     }
     

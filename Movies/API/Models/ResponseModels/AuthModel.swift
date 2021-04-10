@@ -7,11 +7,16 @@
 
 import Foundation
 
+// MARK: - AuthModel
 struct AuthModel: Codable {
     let success: Bool
-    let expires_at, request_token, status_code, status_message: String?
+    let expiresAt, requestToken, statusCode, statusMessage: String?
     
     enum CodingKeys: String, CodingKey {
-        case success, expires_at, request_token, status_code, status_message
+        case success
+        case expiresAt = "expires_at"
+        case requestToken = "request_token"
+        case statusCode = "status_code"
+        case statusMessage = "status_message"
     }
 }

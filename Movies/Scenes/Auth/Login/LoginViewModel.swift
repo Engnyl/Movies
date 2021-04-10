@@ -14,20 +14,20 @@ final class LoginViewModel: LoginViewModelProtocol {
         self.notifyViewController(.loadView)
     }
     
-    func loginButtonPressed(loginRequestModel: LoginRequestModel) {
-        guard (loginRequestModel.username != nil && loginRequestModel.username!.count > 0) && (loginRequestModel.password != nil && loginRequestModel.password!.count > 0) else {
+    func loginButtonPressed(authRequestModel: AuthRequestModel) {
+        guard (authRequestModel.username != nil && authRequestModel.username!.count > 0) && (authRequestModel.password != nil && authRequestModel.password!.count > 0) else {
             self.notifyViewController(.showToastMessage(message: "Please enter all the fields."))
             
             return
         }
         
-        guard (loginRequestModel.username!.count >= 4) else {
+        guard (authRequestModel.username!.count >= 4) else {
             self.notifyViewController(.showToastMessage(message: "Username must be at least 4 characters."))
             
             return
         }
         
-        guard (loginRequestModel.password!.count >= 4) else {
+        guard (authRequestModel.password!.count >= 4) else {
             self.notifyViewController(.showToastMessage(message: "Password must be at least 4 characters."))
             
             return
@@ -35,19 +35,18 @@ final class LoginViewModel: LoginViewModelProtocol {
         
         self.notifyViewController(.hideKeyboard)
         self.notifyViewController(.isLoading(loading: true))
-        self.startAuthentication(loginRequestModel: loginRequestModel)
+        self.startAuthentication(authRequestModel: authRequestModel)
     }
     
-    func loginViaWebsiteButtonTapped(loginRequestModel: LoginRequestModel) {
+    func loginViaWebsiteButtonTapped(authRequestModel: AuthRequestModel) {
         self.notifyViewController(.hideKeyboard)
         self.notifyViewController(.isLoading(loading: true))
-        self.startAuthentication(loginRequestModel: loginRequestModel)
+        self.startAuthentication(authRequestModel: authRequestModel)
     }
     
-    private func startAuthentication(loginRequestModel: LoginRequestModel) {
+    private func startAuthentication(authRequestModel: AuthRequestModel) {
         let requestTokenAPIRequest: RequestTokenAPIRequest = RequestTokenAPIRequest.init()
         requestTokenAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
-            
             guard let self = self else { return }
             
             guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
@@ -57,7 +56,7 @@ final class LoginViewModel: LoginViewModelProtocol {
                 return
             }
             
-            self.login(loginRequestModel: loginRequestModel, requestToken: responseObject.request_token!)
+            self.login(authRequestModel: authRequestModel, requestToken: responseObject.requestToken!)
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             
@@ -67,8 +66,8 @@ final class LoginViewModel: LoginViewModelProtocol {
         }
     }
 
-    private func login(loginRequestModel: LoginRequestModel, requestToken: String) {
-        let loginAPIRequest: LoginAPIRequest = LoginAPIRequest.init(loginRequestModel: LoginRequestModel.init(username: loginRequestModel.username, password: loginRequestModel.password, request_token: requestToken))
+    private func login(authRequestModel: AuthRequestModel, requestToken: String) {
+        let loginAPIRequest: LoginAPIRequest = LoginAPIRequest.init(authRequestModel: AuthRequestModel.init(username: authRequestModel.username, password: authRequestModel.password, request_token: requestToken))
         loginAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
             self?.notifyViewController(.isLoading(loading: false))
             

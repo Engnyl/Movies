@@ -12,7 +12,7 @@ final class APIManager: NSObject {
     
     static func request(_APIRequest: APIRequest, succeed: @escaping (_ responseData : Data, _ message : String?) -> Void, failed: @escaping (_ message : String) -> Void) {
         switch _APIRequest.httpMethod! {
-            
+        
         case HTTPMethod.get:
             AF.request(_APIRequest.endPoint, method: .get, parameters: _APIRequest.bodyParameters ?? nil, encoding: JSONEncoding(), headers: _APIRequest.headers).responseJSON { response in
                 guard let responseData = response.data else {
@@ -27,13 +27,39 @@ final class APIManager: NSObject {
                     if let responseJSON = decoded as? [String : Any] {
                         print(_APIRequest.endPoint!, responseJSON)
                         
-                        guard let status: Bool = responseJSON["success"] as? Bool else {
-                            failed(ResponseError.serverError.rawValue)
+                        if (responseJSON["success"] != nil) {
+                            guard let status: Bool = responseJSON["success"] as? Bool else {
+                                failed(ResponseError.serverError.rawValue)
+                                
+                                return
+                            }
                             
-                            return
+                            if status == true {
+                                do {
+                                    let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
+                                    
+                                    if let message = responseJSON["status_message"] as? String {
+                                        succeed(data, message)
+                                    }
+                                    else {
+                                        succeed(data, nil)
+                                    }
+                                }
+                                catch {
+                                    failed(error.localizedDescription)
+                                }
+                            }
+                            else {
+                                guard let message = responseJSON["status_message"] as? String else {
+                                    failed(ResponseError.serverError.rawValue)
+                                    
+                                    return
+                                }
+                                
+                                failed(message)
+                            }
                         }
-                        
-                        if status == true {
+                        else {
                             do {
                                 let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
                                 
@@ -47,15 +73,6 @@ final class APIManager: NSObject {
                             catch {
                                 failed(error.localizedDescription)
                             }
-                        }
-                        else {
-                            guard let message = responseJSON["status_message"] as? String else {
-                                failed(ResponseError.serverError.rawValue)
-                                
-                                return
-                            }
-                            
-                            failed(message)
                         }
                     }
                     else {
@@ -81,13 +98,39 @@ final class APIManager: NSObject {
                     if let responseJSON = decoded as? [String : Any] {
                         print(_APIRequest.endPoint!, responseJSON)
                         
-                        guard let status: Bool = responseJSON["success"] as? Bool else {
-                            failed(ResponseError.serverError.rawValue)
+                        if (responseJSON["success"] != nil) {
+                            guard let status: Bool = responseJSON["success"] as? Bool else {
+                                failed(ResponseError.serverError.rawValue)
+                                
+                                return
+                            }
                             
-                            return
+                            if status == true {
+                                do {
+                                    let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
+                                    
+                                    if let message = responseJSON["status_message"] as? String {
+                                        succeed(data, message)
+                                    }
+                                    else {
+                                        succeed(data, nil)
+                                    }
+                                }
+                                catch {
+                                    failed(error.localizedDescription)
+                                }
+                            }
+                            else {
+                                guard let message = responseJSON["status_message"] as? String else {
+                                    failed(ResponseError.serverError.rawValue)
+                                    
+                                    return
+                                }
+                                
+                                failed(message)
+                            }
                         }
-                        
-                        if status == true {
+                        else {
                             do {
                                 let data = try JSONSerialization.data(withJSONObject: responseJSON, options: [])
                                 
@@ -101,15 +144,6 @@ final class APIManager: NSObject {
                             catch {
                                 failed(error.localizedDescription)
                             }
-                        }
-                        else {
-                            guard let message = responseJSON["status_message"] as? String else {
-                                failed(ResponseError.serverError.rawValue)
-                                
-                                return
-                            }
-                            
-                            failed(message)
                         }
                     }
                     else {

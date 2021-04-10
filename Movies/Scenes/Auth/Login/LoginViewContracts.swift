@@ -11,8 +11,8 @@ protocol LoginViewModelProtocol {
     var delegate: LoginViewModelDelegate? { get set }
     
     func loadView()
-    func loginButtonPressed(loginRequestModel: LoginRequestModel)
-    func loginViaWebsiteButtonTapped(loginRequestModel: LoginRequestModel)
+    func loginButtonPressed(authRequestModel: AuthRequestModel)
+    func loginViaWebsiteButtonTapped(authRequestModel: AuthRequestModel)
 }
 
 enum LoginViewModelOutput {

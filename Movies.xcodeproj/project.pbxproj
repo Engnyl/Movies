@@ -17,7 +17,11 @@
 		A90DF61D261EE82700ADEB9D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90DF61C261EE82700ADEB9D /* UserDefaultsManager.swift */; };
 		A90DF622261EE90500ADEB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90DF621261EE90500ADEB9D /* Constants.swift */; };
 		A9334A0E261F107F00FC69B8 /* LoginAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9334A0D261F107F00FC69B8 /* LoginAPIRequest.swift */; };
-		A9334A14261F10E000FC69B8 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9334A13261F10E000FC69B8 /* LoginRequestModel.swift */; };
+		A9334A14261F10E000FC69B8 /* AuthRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9334A13261F10E000FC69B8 /* AuthRequestModel.swift */; };
+		A95F4AE52621B60D004B92A4 /* SessionAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AE42621B60D004B92A4 /* SessionAPIRequest.swift */; };
+		A95F4AEA2621B73E004B92A4 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AE92621B73E004B92A4 /* AccountModel.swift */; };
+		A95F4AEF2621B90D004B92A4 /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AEE2621B90D004B92A4 /* SessionModel.swift */; };
+		A95F4AF42621B9CA004B92A4 /* AccountAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AF32621B9CA004B92A4 /* AccountAPIRequest.swift */; };
 		A96B3E39261F1D0F006743C0 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A96B3E38261F1D0F006743C0 /* Auth.storyboard */; };
 		A96B3E41261F1EA5006743C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B3E40261F1EA5006743C0 /* LoginViewModel.swift */; };
 		A96B3E46261F1EC3006743C0 /* LoginViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B3E45261F1EC3006743C0 /* LoginViewContracts.swift */; };
@@ -77,7 +81,11 @@
 		A90DF61C261EE82700ADEB9D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		A90DF621261EE90500ADEB9D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A9334A0D261F107F00FC69B8 /* LoginAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPIRequest.swift; sourceTree = "<group>"; };
-		A9334A13261F10E000FC69B8 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
+		A9334A13261F10E000FC69B8 /* AuthRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRequestModel.swift; sourceTree = "<group>"; };
+		A95F4AE42621B60D004B92A4 /* SessionAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionAPIRequest.swift; sourceTree = "<group>"; };
+		A95F4AE92621B73E004B92A4 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		A95F4AEE2621B90D004B92A4 /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
+		A95F4AF32621B9CA004B92A4 /* AccountAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRequest.swift; sourceTree = "<group>"; };
 		A96B3E38261F1D0F006743C0 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		A96B3E40261F1EA5006743C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A96B3E45261F1EC3006743C0 /* LoginViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewContracts.swift; sourceTree = "<group>"; };
@@ -152,7 +160,7 @@
 		A9334A12261F10BB00FC69B8 /* RequestModels */ = {
 			isa = PBXGroup;
 			children = (
-				A9334A13261F10E000FC69B8 /* LoginRequestModel.swift */,
+				A9334A13261F10E000FC69B8 /* AuthRequestModel.swift */,
 			);
 			path = RequestModels;
 			sourceTree = "<group>";
@@ -322,6 +330,8 @@
 			children = (
 				A9A5A10B261DF9BF00D2EF11 /* RequestTokenAPIRequest.swift */,
 				A9334A0D261F107F00FC69B8 /* LoginAPIRequest.swift */,
+				A95F4AE42621B60D004B92A4 /* SessionAPIRequest.swift */,
+				A95F4AF32621B9CA004B92A4 /* AccountAPIRequest.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -351,6 +361,8 @@
 			isa = PBXGroup;
 			children = (
 				A9DA9B59261EE4760071013C /* AuthModel.swift */,
+				A95F4AEE2621B90D004B92A4 /* SessionModel.swift */,
+				A95F4AE92621B73E004B92A4 /* AccountModel.swift */,
 			);
 			path = ResponseModels;
 			sourceTree = "<group>";
@@ -610,6 +622,7 @@
 				A9A5A10E261DF9C000D2EF11 /* APIConstants.swift in Sources */,
 				A9A5A111261DF9C000D2EF11 /* APIRequest.swift in Sources */,
 				A97DDFC6261DF77500C881C2 /* LoginViewController.swift in Sources */,
+				A95F4AE52621B60D004B92A4 /* SessionAPIRequest.swift in Sources */,
 				A9A5A110261DF9C000D2EF11 /* RequestTokenAPIRequest.swift in Sources */,
 				A96B3E56261F1FC5006743C0 /* LoginViewBuilder.swift in Sources */,
 				A90DF61D261EE82700ADEB9D /* UserDefaultsManager.swift in Sources */,
@@ -620,6 +633,8 @@
 				A9099D5126205EB900CF62DB /* SearchViewBuilder.swift in Sources */,
 				A96B3E6E261F2073006743C0 /* CustomTabBarBuilder.swift in Sources */,
 				A96B3E46261F1EC3006743C0 /* LoginViewContracts.swift in Sources */,
+				A95F4AF42621B9CA004B92A4 /* AccountAPIRequest.swift in Sources */,
+				A95F4AEF2621B90D004B92A4 /* SessionModel.swift in Sources */,
 				A96B3E41261F1EA5006743C0 /* LoginViewModel.swift in Sources */,
 				A97DDFC2261DF77500C881C2 /* AppDelegate.swift in Sources */,
 				A96B3EB6261F28CD006743C0 /* SearchViewController.swift in Sources */,
@@ -629,9 +644,10 @@
 				A9099D5626205EC100CF62DB /* SearchViewContracts.swift in Sources */,
 				A96B3E87261F226B006743C0 /* SuperViewController.swift in Sources */,
 				A96B3E97261F2604006743C0 /* Extensions.swift in Sources */,
+				A95F4AEA2621B73E004B92A4 /* AccountModel.swift in Sources */,
 				A90DF622261EE90500ADEB9D /* Constants.swift in Sources */,
 				A9334A0E261F107F00FC69B8 /* LoginAPIRequest.swift in Sources */,
-				A9334A14261F10E000FC69B8 /* LoginRequestModel.swift in Sources */,
+				A9334A14261F10E000FC69B8 /* AuthRequestModel.swift in Sources */,
 				A96B3E92261F23DC006743C0 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

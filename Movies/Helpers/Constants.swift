@@ -9,6 +9,8 @@ import UIKit
 
 let REQUEST_TOKEN = "request_token"
 let REQUEST_TOKEN_EXPIRE = "expires_at"
+let SESSION_ID = "session_id"
+let ACCOUNT_ID = "id"
 
 let lightBlueColor: UIColor = UIColor(red: 20/255.0, green: 210/255.0, blue: 250/255.0, alpha: 1.0)
 let midBlueColor: UIColor = UIColor(red: 10/255.0, green: 100/255.0, blue: 175/255.0, alpha: 1.0)
