@@ -9,9 +9,10 @@ import UIKit
 
 final class MovieInfoViewBuilder {
     
-    static func make(with viewModel: MovieInfoViewModelProtocol) -> MovieInfoViewController {
+    static func make(with viewModel: MovieInfoViewModelProtocol, movieID: String) -> MovieInfoViewController {
         let viewController = UIStoryboard.load(.main, identifier: "MovieInfoViewController") as! MovieInfoViewController
         viewController.viewModel = viewModel
+        viewController.movieID = movieID
         
         return viewController
     }

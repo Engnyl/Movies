@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - AuthRequestModel
 struct AuthRequestModel: Codable {
     let username, password, request_token: String?
     

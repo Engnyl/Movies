@@ -22,7 +22,7 @@ enum SearchViewModelOutput {
 }
 
 enum SearchViewRoute {
-    case movieDetail(MovieInfoViewModelProtocol)
+    case movieDetail(MovieInfoViewModelProtocol, String)
 }
 
 protocol SearchViewModelDelegate: class {

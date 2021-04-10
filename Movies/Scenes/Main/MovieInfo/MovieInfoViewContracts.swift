@@ -10,7 +10,9 @@ import Foundation
 protocol MovieInfoViewModelProtocol {
     var delegate: MovieInfoViewModelDelegate? { get set }
     
-    func loadView()
+    func loadView(movieID: String)
+    func addWatchlistButtonPressed(watchlistUpdateRequestModel: WatchlistUpdateRequestModel)
+    func addFavoriteButtonPressed(favoriteUpdateRequestModel: FavoriteUpdateRequestModel)
 }
 
 enum MovieInfoViewModelOutput {

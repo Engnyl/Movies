@@ -49,7 +49,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         requestTokenAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
             guard let self = self else { return }
             
-            guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
+            guard let responseObject = try? JSONDecoder().decode(GenericModel.self, from: responseData) else {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
                 self.notifyViewController(.isLoading(loading: false))
                 
@@ -73,13 +73,13 @@ final class LoginViewModel: LoginViewModelProtocol {
             
             guard let self = self else { return }
             
-            guard let responseObject = try? JSONDecoder().decode(AuthModel.self, from: responseData) else {
+            guard let responseObject = try? JSONDecoder().decode(GenericModel.self, from: responseData) else {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
                 
                 return
             }
             
-            registerToken(authModel: responseObject)
+            registerToken(genericModel: responseObject)
             
             self.navigateViewController(.customTabBar)
         }) { [weak self] (message) in

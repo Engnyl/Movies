@@ -56,8 +56,7 @@ final class SearchViewModel: SearchViewModelProtocol {
             self.notifyViewController(.setTitle(title: "Search"))
             
             //self.searchMovie(query: "Hobbit")
-            //self.getMovieInfo(movieID: "49051")
-            self.navigateViewController(.movieDetail(MovieInfoViewModel()))
+            self.navigateViewController(.movieDetail(MovieInfoViewModel(), "49051"))
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             invalidateSession()

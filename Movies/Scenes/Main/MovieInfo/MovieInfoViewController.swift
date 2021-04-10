@@ -23,11 +23,15 @@ final class MovieInfoViewController: SuperViewController {
     var viewModel: MovieInfoViewModelProtocol! {
         didSet {
             viewModel.delegate = self
-            viewModel.loadView()
         }
     }
     
-
+    var movieID: String! {
+        didSet {
+            viewModel.loadView(movieID: movieID)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -61,11 +65,13 @@ final class MovieInfoViewController: SuperViewController {
     }
     
     @objc func addWatchlistButtonTapped() {
-        print("addWatchlistButtonTapped")
+        let watchlistUpdateRequestModel: WatchlistUpdateRequestModel = WatchlistUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, watchlist: true)
+        viewModel.addWatchlistButtonPressed(watchlistUpdateRequestModel: watchlistUpdateRequestModel)
     }
     
     @objc func addFavoriteButtonTapped() {
-        print("addFavoriteButtonTapped")
+        let favoriteUpdateRequestModel: FavoriteUpdateRequestModel = FavoriteUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, favorite: true)
+        viewModel.addFavoriteButtonPressed(favoriteUpdateRequestModel: favoriteUpdateRequestModel)
     }
 }
 

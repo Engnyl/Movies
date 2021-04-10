@@ -51,8 +51,8 @@ extension SearchViewController: SearchViewModelDelegate {
     
     func navigate(to route: SearchViewRoute) {
         switch route {
-        case .movieDetail(let viewModel):
-            let viewController = MovieInfoViewBuilder.make(with: viewModel)
+        case .movieDetail(let viewModel, let movieID):
+            let viewController = MovieInfoViewBuilder.make(with: viewModel, movieID: movieID)
             navigationController?.pushViewController(viewController, animated: true)
             break
         }
