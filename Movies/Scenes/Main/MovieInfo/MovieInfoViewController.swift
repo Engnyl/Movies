@@ -57,7 +57,7 @@ final class MovieInfoViewController: SuperViewController {
         releaseDateLabel.text = movieInfoModel.releaseDate
         descriptionTextView.text = movieInfoModel.overview
         
-        if let imageURL: URL = URL(string: (imageBaseURL + movieInfoModel.posterPath)) {
+        if let imagePath: String = movieInfoModel.posterPath, let imageURL: URL = URL(string: (imageBaseURL + imagePath)) {
             backgroundImageView.sd_setImage(with: imageURL, placeholderImage: nil, options: [], completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, imageURL: URL?) in
                 self.backgroundImageView.image = image
             })
