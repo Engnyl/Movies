@@ -7,7 +7,42 @@
 
 import UIKit
 
+extension SearchViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfCells
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
+        cell.textLabel?.text = viewModel.getMovie(at: indexPath).originalTitle
+        
+        return cell
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        viewModel.goMovieInfo(at: indexPath)
+    }
+}
+
 final class SearchViewController: SuperViewController {
+    @IBOutlet weak var moviesTableView: UITableView! {
+        didSet {
+            moviesTableView.delegate = self
+            moviesTableView.dataSource = self
+            moviesTableView.tableFooterView = UIView(frame: CGRect.zero)
+            moviesTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        }
+    }
     
     var viewModel: SearchViewModelProtocol! {
         didSet {
@@ -16,9 +51,14 @@ final class SearchViewController: SuperViewController {
         }
     }
     
+    let cellReuseIdentifier = "cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.moviesFetched = {[weak self] in
+            self?.moviesTableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +68,7 @@ final class SearchViewController: SuperViewController {
     }
     
     func prepareView() {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        
     }
 }
 

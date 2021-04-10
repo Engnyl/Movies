@@ -9,8 +9,12 @@ import Foundation
 
 protocol SearchViewModelProtocol {
     var delegate: SearchViewModelDelegate? { get set }
+    var numberOfCells: Int { get }
+    var moviesFetched: (() ->())? { get set }
     
     func loadView()
+    func getMovie(at indexPath : IndexPath) -> MovieModel
+    func goMovieInfo(at indexPath : IndexPath)
 }
 
 enum SearchViewModelOutput {
@@ -22,7 +26,7 @@ enum SearchViewModelOutput {
 }
 
 enum SearchViewRoute {
-    case movieDetail(MovieInfoViewModelProtocol, String)
+    case movieDetail(MovieInfoViewModelProtocol, Int)
 }
 
 protocol SearchViewModelDelegate: class {

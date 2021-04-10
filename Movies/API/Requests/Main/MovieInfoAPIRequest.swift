@@ -9,10 +9,10 @@ import Foundation
 
 final class MovieInfoAPIRequest: APIRequest {
     
-    init(movieID: String, language: String) {
+    init(movieID: Int, language: String) {
         super.init()
         
-        super.initAPIRequest(endPoint: String(format: movieInfoURL, movieID),
+        super.initAPIRequest(endPoint: String(format: movieInfoURL, String(movieID)),
                              httpMethod: HTTPMethod.get,
                              bodyParameters: nil,
                              urlParameters: ["api_key" : APIKey,

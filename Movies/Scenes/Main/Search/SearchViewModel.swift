@@ -10,9 +10,29 @@ import UIKit
 final class SearchViewModel: SearchViewModelProtocol {
     var delegate: SearchViewModelDelegate?
     
+    var numberOfCells: Int {
+        return movies.count
+    }
+    
+    var moviesFetched: (() ->())?
+    
+    private var movies : [MovieModel] = [MovieModel]() {
+        didSet {
+            moviesFetched?()
+        }
+    }
+    
     func loadView() {
         self.notifyViewController(.isLoading(loading: true))
         self.getSession()
+    }
+    
+    func getMovie(at indexPath : IndexPath) -> MovieModel {
+        return movies[indexPath.row]
+    }
+    
+    func goMovieInfo(at indexPath : IndexPath) {
+        self.navigateViewController(.movieDetail(MovieInfoViewModel(), movies[indexPath.row].id))
     }
     
     private func getSession() {
@@ -55,8 +75,7 @@ final class SearchViewModel: SearchViewModelProtocol {
             self.notifyViewController(.loadView)
             self.notifyViewController(.setTitle(title: "Search"))
             
-            //self.searchMovie(query: "Hobbit")
-            self.navigateViewController(.movieDetail(MovieInfoViewModel(), "49051"))
+            self.searchMovie(query: "Hobbit")
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             invalidateSession()
@@ -80,7 +99,7 @@ final class SearchViewModel: SearchViewModelProtocol {
                 return
             }
             
-            print(responseObject)
+            self.processMovies(searchList: responseObject)
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             
@@ -88,6 +107,16 @@ final class SearchViewModel: SearchViewModelProtocol {
             
             self.notifyViewController(.showToastMessage(message: message))
         }
+    }
+    
+    private func processMovies(searchList: SearchListModel) {
+        var movies = [MovieModel]()
+        
+        for movie in searchList.movies {
+            movies.append(movie)
+        }
+        
+        self.movies = movies
     }
     
     private func notifyViewController(_ output: SearchViewModelOutput) {

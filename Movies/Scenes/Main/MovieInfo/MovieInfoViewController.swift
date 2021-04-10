@@ -26,7 +26,7 @@ final class MovieInfoViewController: SuperViewController {
         }
     }
     
-    var movieID: String! {
+    var movieID: Int! {
         didSet {
             viewModel.loadView(movieID: movieID)
         }

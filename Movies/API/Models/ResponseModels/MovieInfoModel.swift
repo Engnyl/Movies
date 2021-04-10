@@ -10,8 +10,8 @@ import Foundation
 // MARK: - MovieInfoModel
 struct MovieInfoModel: Codable {
     let adult: Bool
-    let backdropPath: String
-    let belongsToCollection: BelongsToCollection
+    let backdropPath: String?
+    let belongsToCollection: BelongsToCollection?
     let budget: Int
     let genres: [Genre]
     let homepage: String
@@ -71,7 +71,8 @@ struct Genre: Codable {
 // MARK: - ProductionCompany
 struct ProductionCompany: Codable {
     let id: Int
-    let logoPath, name, originCountry: String
+    let logoPath: String?
+    let name, originCountry: String
 
     enum CodingKeys: String, CodingKey {
         case id

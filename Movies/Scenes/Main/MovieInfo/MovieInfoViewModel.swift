@@ -10,12 +10,12 @@ import UIKit
 final class MovieInfoViewModel: MovieInfoViewModelProtocol {
     var delegate: MovieInfoViewModelDelegate?
     
-    func loadView(movieID: String) {
+    func loadView(movieID: Int) {
         self.notifyViewController(.isLoading(loading: true))
         self.getMovieInfo(movieID: movieID)
     }
     
-    private func getMovieInfo(movieID: String) {
+    private func getMovieInfo(movieID: Int) {
         let movieInfoAPIRequest: MovieInfoAPIRequest = MovieInfoAPIRequest.init(movieID: movieID, language: "en-US")
         movieInfoAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
             self?.notifyViewController(.isLoading(loading: false))
