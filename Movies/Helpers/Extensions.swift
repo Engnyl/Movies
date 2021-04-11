@@ -21,3 +21,13 @@ extension UIStoryboard {
         }
     }
 }
+
+
+/* UIImageView */
+extension UIImageView {
+    
+    func changeImageViewTintColor(color: UIColor) {
+        self.image = self.image?.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
+    }
+}

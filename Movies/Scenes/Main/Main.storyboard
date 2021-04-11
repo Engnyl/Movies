@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -56,7 +56,7 @@
                             <constraint firstItem="p9M-Dr-5Fg" firstAttribute="bottom" secondItem="onu-L8-en3" secondAttribute="bottom" id="yQb-aN-mO3"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="l83-B7-TTB"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="film" catalog="system" id="l83-B7-TTB"/>
                     <connections>
                         <outlet property="moviesSearchBar" destination="uGX-sr-tly" id="E0g-Mz-AhX"/>
                         <outlet property="moviesTableView" destination="onu-L8-en3" id="t17-Bp-QRb"/>
@@ -88,7 +88,7 @@
                             <constraint firstItem="hIw-Vk-eWc" firstAttribute="width" secondItem="XvG-Wt-sNR" secondAttribute="width" id="krb-Jm-5Gl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Watchlist" id="xi1-nQ-S4U"/>
+                    <tabBarItem key="tabBarItem" title="Watchlist" image="list.dash" catalog="system" id="xi1-nQ-S4U"/>
                     <connections>
                         <outlet property="watchlistTableView" destination="hIw-Vk-eWc" id="H1s-Bb-u2h"/>
                     </connections>
@@ -119,7 +119,7 @@
                             <constraint firstItem="l6Y-dA-nTw" firstAttribute="top" secondItem="58y-LS-21b" secondAttribute="top" id="qnh-ry-tn4"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="oQO-Pl-fur"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.fill" catalog="system" id="oQO-Pl-fur"/>
                     <connections>
                         <outlet property="favoritesTableView" destination="l6Y-dA-nTw" id="VYZ-fR-soK"/>
                     </connections>
@@ -148,9 +148,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qbO-i9-6ju">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="score_icon" translatesAutoresizingMaskIntoConstraints="NO" id="qbO-i9-6ju">
                                 <rect key="frame" x="16" y="181.5" width="20" height="20"/>
-                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ugz-0x-XGM"/>
                                 </constraints>
@@ -167,9 +166,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YRN-x4-aD0">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="release_date_icon" translatesAutoresizingMaskIntoConstraints="NO" id="YRN-x4-aD0">
                                 <rect key="frame" x="378" y="181.5" width="20" height="20"/>
-                                <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YRN-x4-aD0" secondAttribute="height" multiplier="1:1" id="b3b-Nn-IGU"/>
                                     <constraint firstAttribute="height" constant="20" id="w9M-Yq-U52"/>
@@ -185,26 +183,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQx-7e-ZOe">
                                 <rect key="frame" x="0.0" y="818" width="414" height="78"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kX-ud-RSf">
-                                        <rect key="frame" x="16" y="8" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kX-ud-RSf">
+                                        <rect key="frame" x="16" y="8" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5kX-ud-RSf" secondAttribute="height" multiplier="1:1" id="5XG-MD-1ry"/>
-                                            <constraint firstAttribute="height" constant="30" id="CDo-2X-uSg"/>
+                                            <constraint firstAttribute="height" constant="44" id="CDo-2X-uSg"/>
                                         </constraints>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="list.dash" catalog="system" symbolScale="large"/>
+                                        </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uq7-8K-0Pq">
-                                        <rect key="frame" x="62" y="8" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="jlW-cf-hkH"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uq7-8K-0Pq">
+                                        <rect key="frame" x="76" y="8" width="44" height="44"/>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="5kX-ud-RSf" firstAttribute="leading" secondItem="VQx-7e-ZOe" secondAttribute="leading" constant="16" id="2fI-YA-GHY"/>
-                                    <constraint firstItem="uq7-8K-0Pq" firstAttribute="width" secondItem="uq7-8K-0Pq" secondAttribute="height" multiplier="1:1" id="4Bk-kP-zPQ"/>
+                                    <constraint firstItem="uq7-8K-0Pq" firstAttribute="width" secondItem="5kX-ud-RSf" secondAttribute="width" id="DcD-Cc-sSj"/>
                                     <constraint firstItem="uq7-8K-0Pq" firstAttribute="centerY" secondItem="5kX-ud-RSf" secondAttribute="centerY" id="Hun-hf-eDk"/>
                                     <constraint firstItem="uq7-8K-0Pq" firstAttribute="leading" secondItem="5kX-ud-RSf" secondAttribute="trailing" constant="16" id="KeH-Tb-oW3"/>
+                                    <constraint firstItem="uq7-8K-0Pq" firstAttribute="height" secondItem="5kX-ud-RSf" secondAttribute="height" id="Mdg-cn-WUZ"/>
                                     <constraint firstItem="5kX-ud-RSf" firstAttribute="top" secondItem="VQx-7e-ZOe" secondAttribute="top" constant="8" id="N53-kC-nGO"/>
                                     <constraint firstAttribute="height" constant="78" id="eKt-iw-Upu"/>
                                 </constraints>
@@ -242,6 +246,7 @@
                         <outlet property="backgroundImageView" destination="Ket-WP-U86" id="ltx-rP-S27"/>
                         <outlet property="buttonContainerView" destination="VQx-7e-ZOe" id="mvO-qn-nDf"/>
                         <outlet property="descriptionTextView" destination="fbK-JX-Kba" id="b7H-9L-jH1"/>
+                        <outlet property="releaseDateIcon" destination="YRN-x4-aD0" id="ien-4Z-vgX"/>
                         <outlet property="releaseDateLabel" destination="c7v-Nd-7Tr" id="tuA-tJ-aum"/>
                         <outlet property="scoreLabel" destination="NEr-hA-6jf" id="4dZ-1H-kGL"/>
                         <outlet property="titleLabel" destination="aJf-kF-v5P" id="cX0-fU-MuS"/>
@@ -253,14 +258,19 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="film" catalog="system" width="128" height="93"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="release_date_icon" width="512" height="512"/>
+        <image name="score_icon" width="512" height="512"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

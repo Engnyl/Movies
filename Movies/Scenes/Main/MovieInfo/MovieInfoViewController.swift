@@ -13,6 +13,7 @@ final class MovieInfoViewController: SuperViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var releaseDateIcon: UIImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var addWatchlistButton: UIButton!
@@ -47,14 +48,13 @@ final class MovieInfoViewController: SuperViewController {
         view.backgroundColor = lightGrayColor
         buttonContainerView.backgroundColor = darkGrayColor
         
-        addWatchlistButton.backgroundColor = darkBlueColor
-        addFavoriteButton.backgroundColor = darkBlueColor
         addWatchlistButton.addTarget(self, action: #selector(addWatchlistButtonTapped), for: UIControl.Event.touchUpInside)
         addFavoriteButton.addTarget(self, action: #selector(addFavoriteButtonTapped), for: UIControl.Event.touchUpInside)
         
         titleLabel.text = movieInfoModel.originalTitle
         scoreLabel.text = String(movieInfoModel.voteAverage)
         releaseDateLabel.text = movieInfoModel.releaseDate
+        releaseDateIcon.isHidden = !(movieInfoModel.releaseDate.count > 0)
         descriptionTextView.text = movieInfoModel.overview
         
         if let imagePath: String = movieInfoModel.posterPath, let imageURL: URL = URL(string: (imageBaseURL + imagePath)) {

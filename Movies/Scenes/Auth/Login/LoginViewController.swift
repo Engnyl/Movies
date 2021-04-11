@@ -8,6 +8,7 @@
 import UIKit
 
 final class LoginViewController: SuperViewController {
+    @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -37,6 +38,8 @@ final class LoginViewController: SuperViewController {
         gradient.frame = view.bounds
         gradient.colors = [lightBlueColor.cgColor, darkBlueColor.cgColor]
         view.layer.insertSublayer(gradient, at: 0)
+        
+        movieImageView.changeImageViewTintColor(color: UIColor.white)
         
         loginButton.backgroundColor = darkBlueColor
         loginViaWebsiteButton.backgroundColor = darkBlueColor

@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lJM-Lg-LVS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie_icon" translatesAutoresizingMaskIntoConstraints="NO" id="lJM-Lg-LVS">
                                 <rect key="frame" x="116" y="60" width="182" height="182"/>
-                                <color key="backgroundColor" red="0.019607843137254902" green="0.21176470588235294" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="182" id="tUa-Bd-YR2"/>
                                     <constraint firstAttribute="width" secondItem="lJM-Lg-LVS" secondAttribute="height" id="tvK-69-an6"/>
@@ -103,6 +102,7 @@
                     <connections>
                         <outlet property="loginButton" destination="T68-9r-Dvz" id="d1U-Bv-8IJ"/>
                         <outlet property="loginViaWebsiteButton" destination="sBK-ve-8Yl" id="jbK-1r-oeX"/>
+                        <outlet property="movieImageView" destination="lJM-Lg-LVS" id="ivl-nD-676"/>
                         <outlet property="passwordTextField" destination="icj-Ft-Kop" id="SvE-tF-xvX"/>
                         <outlet property="usernameTextField" destination="2HK-L8-t7c" id="Q4a-yx-p4g"/>
                     </connections>
@@ -113,6 +113,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="movie_icon" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
