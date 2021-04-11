@@ -17,7 +17,9 @@ let newSessionURL = "/authentication/session/new?"
 let accountURL = "/account?"
 let searchMovieURL = "/search/movie?"
 let movieInfoURL = "/movie/%@?"
+let getWatchlistURL = "/account/%@/watchlist/movies?"
 let watchlistUpdateURL = "/account/%@/watchlist?"
+let getFavoritesURL = "/account/%@/favorite/movies?"
 let favoriteUpdateURL = "/account/%@/favorite?"
 
 public enum HTTPMethod: String {

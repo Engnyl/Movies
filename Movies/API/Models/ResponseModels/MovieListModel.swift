@@ -1,5 +1,5 @@
 //
-//  SearchListModel.swift
+//  MovieListModel.swift
 //  Movies
 //
 //  Created by Engin Yildiz on 10.04.2021.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - SearchListModel
-struct SearchListModel: Codable {
+// MARK: - MovieListModel
+struct MovieListModel: Codable {
     let page: Int
     let movies: [MovieModel]
     let totalPages, totalResults: Int

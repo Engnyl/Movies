@@ -23,7 +23,6 @@ enum SearchViewModelOutput {
     case showToastMessage(message: String)
     case isLoading(loading: Bool)
     case hideKeyboard
-    case setTitle(title: String)
 }
 
 enum SearchViewRoute {

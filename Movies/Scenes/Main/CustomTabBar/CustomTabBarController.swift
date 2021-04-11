@@ -15,6 +15,8 @@ final class CustomTabBarController: UITabBarController {
         self.tabBar.barTintColor = darkGrayColor
         self.tabBar.tintColor = darkBlueColor
         
-        viewControllers = [SearchViewBuilder.make(with: SearchViewModel())]
+        viewControllers = [SearchViewBuilder.make(with: SearchViewModel()),
+                           WatchlistViewBuilder.make(with: WatchlistViewModel()),
+                           FavoritesViewBuilder.make(with: FavoritesViewModel())]
     }
 }

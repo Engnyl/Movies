@@ -1,13 +1,13 @@
 //
-//  SearchViewController.swift
+//  FavoritesViewController.swift
 //  Movies
 //
-//  Created by Engin Yildiz on 8.04.2021.
+//  Created by Engin Yildiz on 11.04.2021.
 //
 
 import UIKit
 
-extension SearchViewController: UITableViewDataSource {
+extension FavoritesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -18,14 +18,22 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
-        cell.textLabel?.text = viewModel.getMovie(at: indexPath).originalTitle
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell", for: indexPath) as? MovieTableViewCell else {
+            fatalError("Cell does not exists in storyboard")
+        }
+        
+        let cellViewModel = viewModel.getCellViewModel(at: indexPath)
+        cell.cellViewModel = cellViewModel
         
         return cell
     }
 }
 
-extension SearchViewController: UITableViewDelegate {
+extension FavoritesViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -34,35 +42,19 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
-extension SearchViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard searchBar.text!.count > 0 else { return }
-        
-        searchBar.resignFirstResponder()
-        viewModel.searchMovie(query: searchBar.text!)
-    }
-}
-
-final class SearchViewController: SuperViewController {
-    @IBOutlet weak var moviesTableView: UITableView! {
+final class FavoritesViewController: SuperViewController {
+    @IBOutlet weak var favoritesTableView: UITableView! {
         didSet {
-            moviesTableView.delegate = self
-            moviesTableView.dataSource = self
-            moviesTableView.tableFooterView = UIView(frame: CGRect.zero)
-            moviesTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        }
-    }
-    @IBOutlet weak var moviesSearchBar: UISearchBar! {
-        didSet {
-            moviesSearchBar.delegate = self
+            favoritesTableView.delegate = self
+            favoritesTableView.dataSource = self
+            favoritesTableView.tableFooterView = UIView(frame: CGRect.zero)
+            favoritesTableView.register(UINib.init(nibName: "MovieTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MovieTableViewCell")
         }
     }
     
-    var viewModel: SearchViewModelProtocol! {
+    var viewModel: FavoritesViewModelProtocol! {
         didSet {
             viewModel.delegate = self
-            viewModel.loadView()
         }
     }
     
@@ -71,16 +63,18 @@ final class SearchViewController: SuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.moviesFetched = {[weak self] in
-            self?.moviesTableView.reloadData()
+        viewModel.reloadFavoritesTableViewClosure = {[weak self] in
+            self?.favoritesTableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = false
-        tabBarController?.navigationItem.title = "Search"
+        tabBarController?.navigationItem.title = "Favorites"
         
         super.viewWillAppear(animated)
+        
+        viewModel.loadView()
     }
     
     func prepareView() {
@@ -88,9 +82,9 @@ final class SearchViewController: SuperViewController {
     }
 }
 
-extension SearchViewController: SearchViewModelDelegate {
+extension FavoritesViewController: FavoritesViewModelDelegate {
     
-    func handleViewModelOutput(_ output: SearchViewModelOutput) {
+    func handleViewModelOutput(_ output: FavoritesViewModelOutput) {
         switch output {
         case .loadView:
             prepareView()
@@ -103,7 +97,7 @@ extension SearchViewController: SearchViewModelDelegate {
         }
     }
     
-    func navigate(to route: SearchViewRoute) {
+    func navigate(to route: FavoritesViewRoute) {
         switch route {
         case .movieDetail(let viewModel, let movieID):
             let viewController = MovieInfoViewBuilder.make(with: viewModel, movieID: movieID)

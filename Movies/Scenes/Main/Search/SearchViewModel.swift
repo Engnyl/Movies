@@ -16,7 +16,7 @@ final class SearchViewModel: SearchViewModelProtocol {
     
     var moviesFetched: (() ->())?
     
-    private var movies : [MovieModel] = [MovieModel]() {
+    private var movies: [MovieModel] = [MovieModel]() {
         didSet {
             moviesFetched?()
         }
@@ -44,13 +44,13 @@ final class SearchViewModel: SearchViewModelProtocol {
             
             guard let self = self else { return }
             
-            guard let responseObject = try? JSONDecoder().decode(SearchListModel.self, from: responseData) else {
+            guard let responseObject = try? JSONDecoder().decode(MovieListModel.self, from: responseData) else {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
                 
                 return
             }
             
-            self.processMovies(searchList: responseObject)
+            self.processMovies(movieList: responseObject)
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             
@@ -98,7 +98,6 @@ final class SearchViewModel: SearchViewModelProtocol {
             
             registerAccountID(accountModel: responseObject)
             self.notifyViewController(.loadView)
-            self.notifyViewController(.setTitle(title: "Search"))
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             invalidateSession()
@@ -109,10 +108,10 @@ final class SearchViewModel: SearchViewModelProtocol {
         }
     }
     
-    private func processMovies(searchList: SearchListModel) {
+    private func processMovies(movieList: MovieListModel) {
         var movies = [MovieModel]()
         
-        for movie in searchList.movies {
+        for movie in movieList.movies {
             movies.append(movie)
         }
         
