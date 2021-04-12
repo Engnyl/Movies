@@ -42,11 +42,13 @@ extension FavoritesViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastSectionIndex: Int = tableView.numberOfSections - 1
-        let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-        
-        if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
-            viewModel.getFavorites()
+        if tableView == favoritesTableView {
+            let lastSectionIndex: Int = tableView.numberOfSections - 1
+            let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+            
+            if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
+                viewModel.getFavorites()
+            }
         }
     }
 }
@@ -66,14 +68,14 @@ final class FavoritesViewController: SuperViewController {
             viewModel.delegate = self
         }
     }
-    
-    let cellReuseIdentifier = "cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.reloadFavoritesTableViewClosure = {[weak self] in
-            self?.favoritesTableView.reloadData()
+            DispatchQueue.main.async {
+                self?.favoritesTableView.reloadData()
+            }
         }
     }
     

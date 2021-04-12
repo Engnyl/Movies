@@ -50,6 +50,7 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
         self.pageIndex = 1
         self.canLoadMore = false
         self.movies = [MovieModel]()
+        self.cellViewModels = [MovieCellViewModel]()
     }
     
     func getFavorites() {

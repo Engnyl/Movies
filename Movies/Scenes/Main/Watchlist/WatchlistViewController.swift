@@ -42,11 +42,13 @@ extension WatchlistViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastSectionIndex: Int = tableView.numberOfSections - 1
-        let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-        
-        if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
-            viewModel.getWatchlist()
+        if tableView == watchlistTableView {
+            let lastSectionIndex: Int = tableView.numberOfSections - 1
+            let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+            
+            if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
+                viewModel.getWatchlist()
+            }
         }
     }
 }
@@ -66,14 +68,14 @@ final class WatchlistViewController: SuperViewController {
             viewModel.delegate = self
         }
     }
-    
-    let cellReuseIdentifier = "cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.reloadWatchlistTableViewClosure = {[weak self] in
-            self?.watchlistTableView.reloadData()
+            DispatchQueue.main.async {
+                self?.watchlistTableView.reloadData()
+            }
         }
     }
     

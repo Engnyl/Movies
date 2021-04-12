@@ -50,6 +50,7 @@ final class WatchlistViewModel: WatchlistViewModelProtocol {
         self.pageIndex = 1
         self.canLoadMore = false
         self.movies = [MovieModel]()
+        self.cellViewModels = [MovieCellViewModel]()
     }
     
     func getWatchlist() {
