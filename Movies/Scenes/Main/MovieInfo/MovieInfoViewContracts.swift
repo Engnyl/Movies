@@ -11,8 +11,8 @@ protocol MovieInfoViewModelProtocol {
     var delegate: MovieInfoViewModelDelegate? { get set }
     
     func loadView(movieID: Int)
-    func addWatchlistButtonPressed(watchlistUpdateRequestModel: WatchlistUpdateRequestModel)
-    func addFavoriteButtonPressed(favoriteUpdateRequestModel: FavoriteUpdateRequestModel)
+    func watchlistButtonPressed(watchlistUpdateRequestModel: WatchlistUpdateRequestModel)
+    func favoriteButtonPressed(favoriteUpdateRequestModel: FavoriteUpdateRequestModel)
 }
 
 enum MovieInfoViewModelOutput {
@@ -21,6 +21,9 @@ enum MovieInfoViewModelOutput {
     case isLoading(loading: Bool)
     case hideKeyboard
     case setTitle(title: String)
+    case setButtonState(movieStateModel: MovieStateModel)
+    case updateWatchlistState(watchlist: Bool)
+    case updateFavoriteState(favorite: Bool)
 }
 
 protocol MovieInfoViewModelDelegate: class {

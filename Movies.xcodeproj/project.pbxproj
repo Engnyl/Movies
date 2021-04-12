@@ -30,6 +30,8 @@
 		A95F4AEA2621B73E004B92A4 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AE92621B73E004B92A4 /* AccountModel.swift */; };
 		A95F4AEF2621B90D004B92A4 /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AEE2621B90D004B92A4 /* SessionModel.swift */; };
 		A95F4AF42621B9CA004B92A4 /* AccountAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95F4AF32621B9CA004B92A4 /* AccountAPIRequest.swift */; };
+		A96B053E262427B90026BDB3 /* GetMovieStateAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B053D262427B90026BDB3 /* GetMovieStateAPIRequest.swift */; };
+		A96B0546262429970026BDB3 /* MovieStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B0545262429970026BDB3 /* MovieStateModel.swift */; };
 		A96B3E39261F1D0F006743C0 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A96B3E38261F1D0F006743C0 /* Auth.storyboard */; };
 		A96B3E41261F1EA5006743C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B3E40261F1EA5006743C0 /* LoginViewModel.swift */; };
 		A96B3E46261F1EC3006743C0 /* LoginViewContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B3E45261F1EC3006743C0 /* LoginViewContracts.swift */; };
@@ -120,6 +122,8 @@
 		A95F4AE92621B73E004B92A4 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		A95F4AEE2621B90D004B92A4 /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		A95F4AF32621B9CA004B92A4 /* AccountAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPIRequest.swift; sourceTree = "<group>"; };
+		A96B053D262427B90026BDB3 /* GetMovieStateAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieStateAPIRequest.swift; sourceTree = "<group>"; };
+		A96B0545262429970026BDB3 /* MovieStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStateModel.swift; sourceTree = "<group>"; };
 		A96B3E38261F1D0F006743C0 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		A96B3E40261F1EA5006743C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A96B3E45261F1EC3006743C0 /* LoginViewContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewContracts.swift; sourceTree = "<group>"; };
@@ -423,6 +427,7 @@
 				A9C105A62621E9490014DE68 /* FavoriteUpdateAPIRequest.swift */,
 				A971304326231B38003C4E4D /* GetWatchlistAPIRequest.swift */,
 				A97130782623250B003C4E4D /* GetFavoritesAPIRequest.swift */,
+				A96B053D262427B90026BDB3 /* GetMovieStateAPIRequest.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				A90537032621CAD30067B51E /* MovieModel.swift */,
 				A905370D2621CB0F0067B51E /* MovieListModel.swift */,
 				A90537172621CF2D0067B51E /* MovieInfoModel.swift */,
+				A96B0545262429970026BDB3 /* MovieStateModel.swift */,
 			);
 			path = ResponseModels;
 			sourceTree = "<group>";
@@ -763,6 +769,7 @@
 				A90DF618261EE80200ADEB9D /* UserUtilities.swift in Sources */,
 				A9DA9B5A261EE4760071013C /* GenericModel.swift in Sources */,
 				A9099D5126205EB900CF62DB /* SearchViewBuilder.swift in Sources */,
+				A96B0546262429970026BDB3 /* MovieStateModel.swift in Sources */,
 				A96B3E6E261F2073006743C0 /* CustomTabBarBuilder.swift in Sources */,
 				A9C105A22621E90F0014DE68 /* FavoriteUpdateRequestModel.swift in Sources */,
 				A9A4558B2621E3F900ECDDD7 /* WatchlistUpdateRequestModel.swift in Sources */,
@@ -798,6 +805,7 @@
 				A90537042621CAD30067B51E /* MovieModel.swift in Sources */,
 				A971302626231419003C4E4D /* WatchlistViewController.swift in Sources */,
 				A9334A0E261F107F00FC69B8 /* LoginAPIRequest.swift in Sources */,
+				A96B053E262427B90026BDB3 /* GetMovieStateAPIRequest.swift in Sources */,
 				A971302B2623142D003C4E4D /* WatchlistViewModel.swift in Sources */,
 				A9334A14261F10E000FC69B8 /* AuthRequestModel.swift in Sources */,
 				A96B3E92261F23DC006743C0 /* LoadingView.swift in Sources */,

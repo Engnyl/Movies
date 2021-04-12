@@ -21,6 +21,7 @@ let getWatchlistURL = "/account/%@/watchlist/movies?"
 let watchlistUpdateURL = "/account/%@/watchlist?"
 let getFavoritesURL = "/account/%@/favorite/movies?"
 let favoriteUpdateURL = "/account/%@/favorite?"
+let getMovieStateURL = "/movie/%@/account_states?"
 
 public enum HTTPMethod: String {
     case get = "GET"

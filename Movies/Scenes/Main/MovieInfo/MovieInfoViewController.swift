@@ -16,8 +16,8 @@ final class MovieInfoViewController: SuperViewController {
     @IBOutlet weak var releaseDateIcon: UIImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var buttonContainerView: UIView!
-    @IBOutlet weak var addWatchlistButton: UIButton!
-    @IBOutlet weak var addFavoriteButton: UIButton!
+    @IBOutlet weak var watchlistButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var movieInfoModel: MovieInfoModel!
     
@@ -48,8 +48,8 @@ final class MovieInfoViewController: SuperViewController {
         view.backgroundColor = lightGrayColor
         buttonContainerView.backgroundColor = darkGrayColor
         
-        addWatchlistButton.addTarget(self, action: #selector(addWatchlistButtonTapped), for: UIControl.Event.touchUpInside)
-        addFavoriteButton.addTarget(self, action: #selector(addFavoriteButtonTapped), for: UIControl.Event.touchUpInside)
+        watchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: UIControl.Event.touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: UIControl.Event.touchUpInside)
         
         titleLabel.text = movieInfoModel.originalTitle
         scoreLabel.text = String(movieInfoModel.voteAverage)
@@ -64,14 +64,14 @@ final class MovieInfoViewController: SuperViewController {
         }
     }
     
-    @objc func addWatchlistButtonTapped() {
-        let watchlistUpdateRequestModel: WatchlistUpdateRequestModel = WatchlistUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, watchlist: true)
-        viewModel.addWatchlistButtonPressed(watchlistUpdateRequestModel: watchlistUpdateRequestModel)
+    @objc func watchlistButtonTapped() {
+        let watchlistUpdateRequestModel: WatchlistUpdateRequestModel = WatchlistUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, watchlist: !watchlistButton.isSelected)
+        viewModel.watchlistButtonPressed(watchlistUpdateRequestModel: watchlistUpdateRequestModel)
     }
     
-    @objc func addFavoriteButtonTapped() {
-        let favoriteUpdateRequestModel: FavoriteUpdateRequestModel = FavoriteUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, favorite: true)
-        viewModel.addFavoriteButtonPressed(favoriteUpdateRequestModel: favoriteUpdateRequestModel)
+    @objc func favoriteButtonTapped() {
+        let favoriteUpdateRequestModel: FavoriteUpdateRequestModel = FavoriteUpdateRequestModel.init(mediaType: "movie", mediaID: movieInfoModel.id, favorite: !favoriteButton.isSelected)
+        viewModel.favoriteButtonPressed(favoriteUpdateRequestModel: favoriteUpdateRequestModel)
     }
 }
 
@@ -90,6 +90,18 @@ extension MovieInfoViewController: MovieInfoViewModelDelegate {
             dismissKeyboard()
         case .setTitle(let title):
             navigationItem.title = title
+        case .setButtonState(let movieStateModel):
+            watchlistButton.isSelected = movieStateModel.watchlist ?? false
+            favoriteButton.isSelected = movieStateModel.favorite ?? false
+            
+            watchlistButton.tintColor = (watchlistButton.isSelected ? darkBlueColor : UIColor.lightGray)
+            favoriteButton.tintColor = (favoriteButton.isSelected ? darkBlueColor : UIColor.lightGray)
+        case .updateWatchlistState(let watchlist):
+            watchlistButton.isSelected = watchlist
+            watchlistButton.tintColor = (watchlistButton.isSelected ? darkBlueColor : UIColor.lightGray)
+        case .updateFavoriteState(let favorite):
+            favoriteButton.isSelected = favorite
+            favoriteButton.tintColor = (favoriteButton.isSelected ? darkBlueColor : UIColor.lightGray)
         }
     }
 }
