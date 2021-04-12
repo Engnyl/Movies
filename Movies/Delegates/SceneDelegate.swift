@@ -25,14 +25,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Present RootViewController
         var navigationController = UINavigationController()
         
-        if userAuthenticated() {
-            let customTabBarController = CustomTabBarBuilder.make()
-            navigationController = UINavigationController(rootViewController: customTabBarController)
-        }
-        else {
+//        if userAuthenticated() {
+//            let customTabBarController = CustomTabBarBuilder.make()
+//            navigationController = UINavigationController(rootViewController: customTabBarController)
+//        }
+//        else {
             let loginViewController = LoginViewBuilder.make(with: LoginViewModel())
             navigationController = UINavigationController(rootViewController: loginViewController)
-        }
+//        }
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene

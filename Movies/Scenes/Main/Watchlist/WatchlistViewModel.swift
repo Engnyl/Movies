@@ -20,7 +20,7 @@ final class WatchlistViewModel: WatchlistViewModelProtocol {
     
     private var movies: [MovieModel] = [MovieModel]() {
         didSet {
-            self.notifyViewController(.loadView)
+            self.reloadWatchlistTableViewClosure?()
         }
     }
     private var cellViewModels: [MovieCellViewModel] = [MovieCellViewModel]() {

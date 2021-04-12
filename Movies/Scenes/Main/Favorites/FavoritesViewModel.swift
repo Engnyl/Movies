@@ -20,7 +20,7 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
     
     private var movies: [MovieModel] = [MovieModel]() {
         didSet {
-            self.notifyViewController(.loadView)
+            self.reloadFavoritesTableViewClosure?()
         }
     }
     private var cellViewModels: [MovieCellViewModel] = [MovieCellViewModel]() {

@@ -57,7 +57,7 @@ final class MovieInfoViewController: SuperViewController {
         releaseDateIcon.isHidden = !(movieInfoModel.releaseDate.count > 0)
         descriptionTextView.text = movieInfoModel.overview
         
-        if let imagePath: String = movieInfoModel.posterPath, let imageURL: URL = URL(string: (imageBaseURL + imagePath)) {
+        if let imagePath: String = movieInfoModel.backdropPath, let imageURL: URL = URL(string: (imageBaseURL + imagePath)) {
             backgroundImageView.sd_setImage(with: imageURL, placeholderImage: nil, options: [], completed: { (image: UIImage?, error: Error?, cacheType: SDImageCacheType, imageURL: URL?) in
                 self.backgroundImageView.image = image
             })

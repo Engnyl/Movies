@@ -91,7 +91,7 @@ final class SearchViewModel: SearchViewModelProtocol {
             self.getAccount()
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
-            invalidateSession()
+//            invalidateSession()
             
             guard let self = self else { return }
             
@@ -116,7 +116,7 @@ final class SearchViewModel: SearchViewModelProtocol {
             self.notifyViewController(.loadView)
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
-            invalidateSession()
+//            invalidateSession()
             
             guard let self = self else { return }
             
