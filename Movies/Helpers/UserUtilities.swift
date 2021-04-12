@@ -9,13 +9,13 @@ import UIKit
 
 //private let dateFormatterString: String = "yyyy-MM-dd H:mm:ss"
 
-//func registerToken(genericModel: GenericModel) {
-//    removePreference(key: REQUEST_TOKEN)
-//    removePreference(key: REQUEST_TOKEN_EXPIRE)
-//
-//    setPreference(key: REQUEST_TOKEN, value: genericModel.requestToken)
-//    setPreference(key: REQUEST_TOKEN_EXPIRE, value: genericModel.expiresAt)
-//}
+func registerToken(genericModel: GenericModel) {
+    removePreference(key: REQUEST_TOKEN)
+    removePreference(key: REQUEST_TOKEN_EXPIRE)
+
+    setPreference(key: REQUEST_TOKEN, value: genericModel.requestToken)
+    setPreference(key: REQUEST_TOKEN_EXPIRE, value: genericModel.expiresAt)
+}
 
 func registerSessionID(sessionModel: SessionModel) {
     removePreference(key: SESSION_ID)

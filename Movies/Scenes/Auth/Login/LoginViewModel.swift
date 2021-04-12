@@ -79,7 +79,7 @@ final class LoginViewModel: LoginViewModelProtocol {
                 return
             }
             
-//            registerToken(genericModel: responseObject)
+            registerToken(genericModel: responseObject)
             
             self.navigateViewController(.customTabBar)
         }) { [weak self] (message) in
