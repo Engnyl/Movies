@@ -9,14 +9,15 @@ import Foundation
 
 final class SearchMovieAPIRequest: APIRequest {
     
-    init(query: String) {
+    init(query: String, pageIndex: Int) {
         super.init()
         
         super.initAPIRequest(endPoint: searchMovieURL,
                              httpMethod: HTTPMethod.get,
                              bodyParameters: nil,
                              urlParameters: ["api_key" : APIKey,
-                                             "query" : query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!])
+                                             "query" : query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+                                             "page" : pageIndex])
     }
     
     override func APIRequest(succeed: @escaping (_ responseData : Data, _ message : String?) -> Void, failed: @escaping (_ message : String) -> Void) {

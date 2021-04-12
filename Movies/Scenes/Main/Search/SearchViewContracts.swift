@@ -10,11 +10,14 @@ import Foundation
 protocol SearchViewModelProtocol {
     var delegate: SearchViewModelDelegate? { get set }
     var numberOfCells: Int { get }
+    var pageIndex: Int { get set }
+    var canLoadMore: Bool { get set }
     var moviesFetched: (() ->())? { get set }
     
     func loadView()
     func getMovie(at indexPath : IndexPath) -> MovieModel
     func goMovieInfo(at indexPath : IndexPath)
+    func resetQuery()
     func searchMovie(query: String)
 }
 

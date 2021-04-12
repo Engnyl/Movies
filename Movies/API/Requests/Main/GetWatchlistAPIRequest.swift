@@ -9,14 +9,15 @@ import Foundation
 
 final class GetWatchlistAPIRequest: APIRequest {
     
-    override init() {
+    init(pageIndex: Int) {
         super.init()
         
         super.initAPIRequest(endPoint: String(format: getWatchlistURL, getStringPreference(key: ACCOUNT_ID)!),
                              httpMethod: HTTPMethod.get,
                              bodyParameters: nil,
                              urlParameters: ["api_key" : APIKey,
-                                             "session_id" : getStringPreference(key: SESSION_ID)!])
+                                             "session_id" : getStringPreference(key: SESSION_ID)!,
+                                             "page" : pageIndex])
     }
     
     override func APIRequest(succeed: @escaping (_ responseData : Data, _ message : String?) -> Void, failed: @escaping (_ message : String) -> Void) {

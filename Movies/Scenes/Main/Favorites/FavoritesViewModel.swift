@@ -13,6 +13,8 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
     var numberOfCells: Int {
         return movies.count
     }
+    var pageIndex: Int = 1
+    var canLoadMore: Bool = false
     
     var reloadFavoritesTableViewClosure: (()->())?
     
@@ -44,12 +46,14 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
         self.navigateViewController(.movieDetail(MovieInfoViewModel(), movies[indexPath.row].id))
     }
     
-    private func createMovieCellViewModel(movie: MovieModel) -> MovieCellViewModel {
-        return MovieCellViewModel(posterPath: movie.posterPath, titleText: movie.originalTitle)
+    func resetQuery() {
+        self.pageIndex = 1
+        self.canLoadMore = false
+        self.movies = [MovieModel]()
     }
     
-    private func getFavorites() {
-        let getFavoritesAPIRequest: GetFavoritesAPIRequest = GetFavoritesAPIRequest.init()
+    func getFavorites() {
+        let getFavoritesAPIRequest: GetFavoritesAPIRequest = GetFavoritesAPIRequest.init(pageIndex: self.pageIndex)
         getFavoritesAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
             self?.notifyViewController(.isLoading(loading: false))
             
@@ -59,6 +63,14 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
                 
                 return
+            }
+            
+            if self.pageIndex < responseObject.totalPages {
+                self.canLoadMore = true
+                self.pageIndex = self.pageIndex + 1
+            }
+            else {
+                self.canLoadMore = false
             }
             
             self.processMovies(movieList: responseObject)
@@ -80,8 +92,23 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
             cellViewModels.append(createMovieCellViewModel(movie: movie))
         }
         
-        self.movies = movies
-        self.cellViewModels = cellViewModels
+        if self.movies.count > 0 {
+            self.movies.append(contentsOf: movies)
+        }
+        else {
+            self.movies = movies
+        }
+        
+        if self.cellViewModels.count > 0 {
+            self.cellViewModels.append(contentsOf: cellViewModels)
+        }
+        else {
+            self.cellViewModels = cellViewModels
+        }
+    }
+    
+    private func createMovieCellViewModel(movie: MovieModel) -> MovieCellViewModel {
+        return MovieCellViewModel(posterPath: movie.posterPath, titleText: movie.title)
     }
     
     private func notifyViewController(_ output: FavoritesViewModelOutput) {

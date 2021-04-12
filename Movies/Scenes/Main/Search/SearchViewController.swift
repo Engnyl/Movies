@@ -19,7 +19,7 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier)! as UITableViewCell
-        cell.textLabel?.text = viewModel.getMovie(at: indexPath).originalTitle
+        cell.textLabel?.text = viewModel.getMovie(at: indexPath).title
         
         return cell
     }
@@ -32,6 +32,15 @@ extension SearchViewController: UITableViewDelegate {
         
         viewModel.goMovieInfo(at: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex: Int = tableView.numberOfSections - 1
+        let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        
+        if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
+            viewModel.searchMovie(query: moviesSearchBar.text!)
+        }
+    }
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -40,6 +49,7 @@ extension SearchViewController: UISearchBarDelegate {
         guard searchBar.text!.count > 0 else { return }
         
         searchBar.resignFirstResponder()
+        viewModel.resetQuery()
         viewModel.searchMovie(query: searchBar.text!)
     }
 }

@@ -68,7 +68,7 @@ final class MovieInfoViewModel: MovieInfoViewModelProtocol {
             
             self.getMovieState(movieID: movieID)
             self.notifyViewController(.loadView(movieInfoModel: responseObject))
-            self.notifyViewController(.setTitle(title: responseObject.originalTitle))
+            self.notifyViewController(.setTitle(title: responseObject.title))
         }) { [weak self] (message) in
             self?.notifyViewController(.isLoading(loading: false))
             

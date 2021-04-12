@@ -51,7 +51,7 @@ final class MovieInfoViewController: SuperViewController {
         watchlistButton.addTarget(self, action: #selector(watchlistButtonTapped), for: UIControl.Event.touchUpInside)
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: UIControl.Event.touchUpInside)
         
-        titleLabel.text = movieInfoModel.originalTitle
+        titleLabel.text = movieInfoModel.title
         scoreLabel.text = String(movieInfoModel.voteAverage)
         releaseDateLabel.text = movieInfoModel.releaseDate
         releaseDateIcon.isHidden = !(movieInfoModel.releaseDate.count > 0)

@@ -13,6 +13,8 @@ final class SearchViewModel: SearchViewModelProtocol {
     var numberOfCells: Int {
         return movies.count
     }
+    var pageIndex: Int = 1
+    var canLoadMore: Bool = false
     
     var moviesFetched: (() ->())?
     
@@ -35,10 +37,16 @@ final class SearchViewModel: SearchViewModelProtocol {
         self.navigateViewController(.movieDetail(MovieInfoViewModel(), movies[indexPath.row].id))
     }
     
+    func resetQuery() {
+        self.pageIndex = 1
+        self.canLoadMore = false
+        self.movies = [MovieModel]()
+    }
+    
     func searchMovie(query: String) {
         self.notifyViewController(.isLoading(loading: true))
         
-        let searchMovieAPIRequest: SearchMovieAPIRequest = SearchMovieAPIRequest.init(query: query)
+        let searchMovieAPIRequest: SearchMovieAPIRequest = SearchMovieAPIRequest.init(query: query, pageIndex: self.pageIndex)
         searchMovieAPIRequest.APIRequest(succeed: { [weak self] (responseData, message) in
             self?.notifyViewController(.isLoading(loading: false))
             
@@ -48,6 +56,14 @@ final class SearchViewModel: SearchViewModelProtocol {
                 self.notifyViewController(.showToastMessage(message: ResponseError.decodingError.rawValue))
                 
                 return
+            }
+            
+            if self.pageIndex < responseObject.totalPages {
+                self.canLoadMore = true
+                self.pageIndex = self.pageIndex + 1
+            }
+            else {
+                self.canLoadMore = false
             }
             
             self.processMovies(movieList: responseObject)
@@ -115,7 +131,12 @@ final class SearchViewModel: SearchViewModelProtocol {
             movies.append(movie)
         }
         
-        self.movies = movies
+        if self.movies.count > 0 {
+            self.movies.append(contentsOf: movies)
+        }
+        else {
+            self.movies = movies
+        }
     }
     
     private func notifyViewController(_ output: SearchViewModelOutput) {

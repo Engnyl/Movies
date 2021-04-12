@@ -10,12 +10,16 @@ import Foundation
 protocol WatchlistViewModelProtocol {
     var delegate: WatchlistViewModelDelegate? { get set }
     var numberOfCells: Int { get }
+    var pageIndex: Int { get set }
+    var canLoadMore: Bool { get set }
     var reloadWatchlistTableViewClosure: (()->())? { get set }
     
     func loadView()
     func getMovie(at indexPath : IndexPath) -> MovieModel
     func getCellViewModel(at indexPath: IndexPath) -> MovieCellViewModel
     func goMovieInfo(at indexPath : IndexPath)
+    func resetQuery()
+    func getWatchlist()
 }
 
 enum WatchlistViewModelOutput {

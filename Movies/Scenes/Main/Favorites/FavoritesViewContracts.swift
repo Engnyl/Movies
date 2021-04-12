@@ -10,12 +10,16 @@ import Foundation
 protocol FavoritesViewModelProtocol {
     var delegate: FavoritesViewModelDelegate? { get set }
     var numberOfCells: Int { get }
+    var pageIndex: Int { get set }
+    var canLoadMore: Bool { get set }
     var reloadFavoritesTableViewClosure: (()->())? { get set }
     
     func loadView()
     func getMovie(at indexPath : IndexPath) -> MovieModel
     func getCellViewModel(at indexPath: IndexPath) -> MovieCellViewModel
     func goMovieInfo(at indexPath : IndexPath)
+    func resetQuery()
+    func getFavorites()
 }
 
 enum FavoritesViewModelOutput {

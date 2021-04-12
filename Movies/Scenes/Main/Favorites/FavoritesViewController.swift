@@ -40,6 +40,15 @@ extension FavoritesViewController: UITableViewDelegate {
         
         viewModel.goMovieInfo(at: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSectionIndex: Int = tableView.numberOfSections - 1
+        let lastRowIndex: Int = tableView.numberOfRows(inSection: lastSectionIndex) - 1
+        
+        if viewModel.canLoadMore && (indexPath.section == lastSectionIndex) && (indexPath.row == lastRowIndex) {
+            viewModel.getFavorites()
+        }
+    }
 }
 
 final class FavoritesViewController: SuperViewController {
@@ -74,6 +83,7 @@ final class FavoritesViewController: SuperViewController {
         
         super.viewWillAppear(animated)
         
+        viewModel.resetQuery()
         viewModel.loadView()
     }
     
